@@ -10,8 +10,6 @@
  * - Part 1 can be solved by reversing edges (child -> parents) and doing a graph traversal from "shiny gold".
  * - Part 2 can be solved by DFS with memoization on the forward graph (parent -> children with counts).
  *
- * Node.js fs docs:
- * https://nodejs.org/api/fs.html
  */
 
 const fs = require("fs");
@@ -19,16 +17,10 @@ const fs = require("fs");
 /**
  * Read input file.
  * Node docs: fs.readFileSync
- * https://nodejs.org/api/fs.html#fsreadfilesyncpath-options
  */
 const raw = fs.readFileSync("inputs/day07.txt", "utf8");
 
-/**
- * Split into lines (rules).
- * MDN docs:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
- */
+
 const lines = raw.trim().split("\n");
 
 const TARGET = "shiny gold";
@@ -38,10 +30,6 @@ const TARGET = "shiny gold";
  * 1) containsGraph: bag -> array of { color, count } that it directly contains
  * 2) parentsGraph: contained bag -> Set of bags that can contain it (reverse edges)
  *
- * MDN Map docs:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
- * MDN Set docs:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
  */
 const containsGraph = new Map();
 const parentsGraph = new Map();
@@ -50,9 +38,7 @@ const parentsGraph = new Map();
  * Parse each rule line.
  * Example:
  * "light red bags contain 1 bright white bag, 2 muted yellow bags."
- *
- * Regex docs:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+ 
  */
 const outerRe = /^(.+?) bags contain (.+)\.$/;
 const innerRe = /^(\d+) (.+?) bag/;

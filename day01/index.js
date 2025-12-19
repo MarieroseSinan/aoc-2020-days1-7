@@ -1,12 +1,9 @@
 /**
- * Advent of Code 2020 - Day 1: Report Repair
  *
  * This solution reads a list of numbers from a text file and:
  *  - Part 1: Finds two numbers that sum to 2020 and multiplies them
  *  - Part 2: Finds three numbers that sum to 2020 and multiplies them
  *
- * Node.js File System documentation:
- * https://nodejs.org/api/fs.html
  */
 
 const fs = require("fs");
@@ -15,8 +12,6 @@ const fs = require("fs");
  * Read the input file as a string.
  * fs.readFileSync reads the file synchronously.
  *
- * Node docs:
- * https://nodejs.org/api/fs.html#fsreadfilesyncpath-options
  */
 const input = fs.readFileSync("inputs/day01.txt", "utf8");
 
@@ -26,10 +21,6 @@ const input = fs.readFileSync("inputs/day01.txt", "utf8");
  *  - split("\n") separates each line
  *  - map(Number) converts strings to numbers
  *
- * MDN docs:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
  */
 const numbers = input.trim().split("\n").map(Number);
 
@@ -46,8 +37,6 @@ const numbers = input.trim().split("\n").map(Number);
 const seen = new Set();
 
 /**
- * MDN Set documentation:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
  */
 for (let num of numbers) {
   const complement = 2020 - num;

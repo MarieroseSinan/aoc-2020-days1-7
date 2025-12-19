@@ -8,18 +8,13 @@
  * byr, iyr, eyr, hgt, hcl, ecl, pid
  *
  * Part 1: Count passports that contain all required fields
- * Part 2: Count passports that contain all required fields AND have valid values
- *
- * Node.js fs docs:
- * https://nodejs.org/api/fs.html
+ * Part 2: Count passports that co
  */
 
 const fs = require("fs");
 
 /**
  * Read the input file.
- * Node docs: fs.readFileSync
- * https://nodejs.org/api/fs.html#fsreadfilesyncpath-options
  */
 const raw = fs.readFileSync("inputs/day04.txt", "utf8");
 
@@ -28,9 +23,6 @@ const raw = fs.readFileSync("inputs/day04.txt", "utf8");
  * - trim() removes trailing newline(s)
  * - split("\n\n") separates passports
  *
- * MDN docs:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
  */
 const passportBlocks = raw.trim().split("\n\n");
 
@@ -59,9 +51,6 @@ const REQUIRED = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
 /**
  * Part 1 check:
  * Passport must contain all required fields.
- *
- * MDN Array.prototype.every docs:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
  */
 function hasRequiredFields(p) {
   return REQUIRED.every((key) => key in p);
@@ -78,32 +67,20 @@ function hasRequiredFields(p) {
  * - ecl: one of allowed set
  * - pid: exactly 9 digits (including leading zeros)
  */
-
-// MDN RegExp docs:
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
 const HCL_RE = /^#[0-9a-f]{6}$/;
 const PID_RE = /^\d{9}$/;
 
 const ECL_ALLOWED = new Set(["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]);
-// MDN Set docs:
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
 
 function isYearInRange(value, min, max) {
-  // Convert string to number with Number()
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
   const n = Number(value);
   return Number.isInteger(n) && n >= min && n <= max;
-  // MDN Number.isInteger:
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger
 }
 
 function isValidHeight(hgt) {
   // Height ends with "cm" or "in"
   if (hgt.endsWith("cm")) {
     const n = Number(hgt.slice(0, -2));
-    // MDN String.prototype.endsWith / slice:
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice
     return n >= 150 && n <= 193;
   }
   if (hgt.endsWith("in")) {
@@ -127,10 +104,7 @@ function isValidPassport(p) {
 
   // hgt
   if (!isValidHeight(p.hgt)) return false;
-
-  // hcl
-  // MDN String.prototype.match:
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
+// hcl
   if (!HCL_RE.test(p.hcl)) return false;
 
   // ecl

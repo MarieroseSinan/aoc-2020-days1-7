@@ -6,19 +6,25 @@
  *
  * Part 1: For each group, count unique questions answered "yes" by anyone (union).
  * Part 2: For each group, count questions answered "yes" by everyone (intersection).
- 
+ *
+ * Node.js fs docs:
+ * https://nodejs.org/api/fs.html
  */
 
 const fs = require("fs");
 
 /**
  * Read input.
+ * Node docs: fs.readFileSync
+ * https://nodejs.org/api/fs.html#fsreadfilesyncpath-options
  */
 const raw = fs.readFileSync("inputs/day06.txt", "utf8");
 
 /**
  * Split into groups by blank lines.
- 
+ * MDN docs:
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
  */
 const groups = raw.trim().split("\n\n");
 
@@ -27,6 +33,9 @@ const groups = raw.trim().split("\n\n");
  * My approach:
  * - Put every letter from every person into a Set
  * - The Set size = number of unique "yes" answers
+ *
+ * MDN Set docs:
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
  */
 function countUnion(groupBlock) {
   const set = new Set();

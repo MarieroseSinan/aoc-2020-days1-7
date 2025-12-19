@@ -10,17 +10,24 @@
  * Part 1: Find the highest seat ID
  * Part 2: Find the missing seat ID (your seat) where both neighbors exist
  *
+ * Node.js fs docs:
+ * https://nodejs.org/api/fs.html
  */
 
 const fs = require("fs");
 
 /**
  * Read input file.
+ * Node docs: fs.readFileSync
+ * https://nodejs.org/api/fs.html#fsreadfilesyncpath-options
  */
 const raw = fs.readFileSync("inputs/day05.txt", "utf8");
 
 /**
  * Split into boarding pass strings.
+ * MDN docs:
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
  */
 const passes = raw.trim().split("\n");
 
@@ -33,7 +40,11 @@ const passes = raw.trim().split("\n");
  *  - Row is 7 bits: FBFBBFF -> 0101100 (in binary)
  *  - Col is 3 bits: RLR -> 101 (in binary)
  *
- * Then parse binary strings with parseInt.
+ * Then parse binary strings with parseInt(..., 2).
+ *
+ * MDN docs:
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
  */
 function seatIdFromPass(pass) {
   const rowBits = pass
@@ -55,6 +66,7 @@ function seatIdFromPass(pass) {
 /**
  * Build list of seat IDs.
  * MDN Array.prototype.map:
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
  */
 const seatIds = passes.map(seatIdFromPass);
 
@@ -62,6 +74,8 @@ const seatIds = passes.map(seatIdFromPass);
 // Part 1: Highest seat ID
 // --------------------
 // MDN Math.max + spread operator docs:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 const part1 = Math.max(...seatIds);
 console.log("Day 5 - Part 1:", part1);
 
@@ -73,6 +87,8 @@ console.log("Day 5 - Part 1:", part1);
 // 2) Find a gap where nextID !== currentID + 1
 // 3) The missing ID is currentID + 1
 //
+// MDN Array.prototype.sort:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 seatIds.sort((a, b) => a - b);
 
 let part2 = null;
